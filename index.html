@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ResumeForge – ATS Resume Builder</title>
+<style>
+:root{--bg:#f4f5f7;--sf:#fff;--tx:#1b1f27;--mu:#667085;--bd:#dde1e7;--ac:#2563eb;--ok:#15803d;--bad:#b91c1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171c;--sf:#1e232b;--tx:#e8eaee;--mu:#9aa3b2;--bd:#323946;--ok:#4ade80;--bad:#f87171}}
+:root[data-theme="dark"]{--bg:#14171c;--sf:#1e232b;--tx:#e8eaee;--mu:#9aa3b2;--bd:#323946;--ok:#4ade80;--bad:#f87171}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.top{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--sf);border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.top h1{font-size:18px;margin:0;flex:1}.top small{color:var(--mu)}
+.app{display:grid;grid-template-columns:430px 1fr;gap:16px;padding:16px;max-width:1400px;margin:auto}
+@media(max-width:900px){.app{grid-template-columns:1fr}}
+.panel{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:14px;align-self:start}
+.tabs{display:flex;gap:4px;margin-bottom:12px}
+.tabs button{flex:1;padding:8px;border:1px solid var(--bd);background:transparent;color:var(--tx);border-radius:8px;cursor:pointer;font-weight:600}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.tp{display:none}.tp.on{display:block}
+label{display:block;font-size:12px;color:var(--mu);margin:8px 0 2px}
+input,textarea,select{width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+textarea{min-height:70px;resize:vertical}
+h3{margin:16px 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mu)}
+.card{border:1px solid var(--bd);border-radius:10px;padding:10px;margin:8px 0}
+.btn{padding:8px 12px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:8px;cursor:pointer;font:inherit}
+.btn.p{background:var(--ac);color:#fff;border-color:var(--ac)}.btn.x{color:var(--bad)}
+.lay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lay button{padding:10px;border:2px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);cursor:pointer;text-align:left}
+.lay button.on{border-color:var(--ac)}
+.sw{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.sw button{width:30px;height:30px;border-radius:50%;border:3px solid var(--sf);outline:2px solid var(--bd);cursor:pointer}
+.sw button.on{outline-color:var(--tx)}
+.score{font-size:44px;font-weight:800}
+.chip{display:inline-block;padding:2px 8px;margin:2px;border-radius:99px;font-size:12px;border:1px solid var(--bd)}
+.chip.g{color:var(--ok);border-color:var(--ok)}.chip.r{color:var(--bad);border-color:var(--bad)}
+.ck{display:flex;gap:8px;padding:3px 0}.ck b{width:16px}
+.pv{overflow-x:auto}
+#paper{background:#fff;color:#111;max-width:794px;width:100%;margin:0 auto;padding:40px;font-size:12.5px;line-height:1.4;box-shadow:0 2px 14px rgba(0,0,0,.18);min-height:600px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+#paper h1{margin:0;font-size:26px;line-height:1.15}#paper h2{margin:14px 0 6px;font-size:13px}
+#paper .ti{font-size:14px;margin-top:2px}#paper .ct{margin-top:4px;font-size:12px}
+#paper p{margin:0 0 4px}#paper ul{margin:3px 0 0;padding-left:18px}#paper li{margin:1px 0}
+#paper .it{margin-bottom:9px}#paper .row{display:flex;justify-content:space-between;gap:10px}
+#paper .co{font-style:italic}
+#paper.dn{font-size:11.5px;line-height:1.3;padding:30px}#paper.dn .it{margin-bottom:5px}#paper.dn h2{margin:9px 0 4px}
+.L-classic header{text-align:center}.L-classic h2{text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid #111}
+.L-modern h1,.L-modern h2{color:var(--pc)}.L-modern h2{border-left:4px solid var(--pc);padding-left:8px}
+.L-compact h2{color:var(--pc);border-bottom:1px solid var(--pc);text-transform:uppercase;font-size:12px}
+.L-executive header{text-align:center;border-bottom:3px double var(--pc);padding-bottom:8px}.L-executive h1{letter-spacing:.12em;text-transform:uppercase;color:var(--pc)}.L-executive h2{color:var(--pc);text-transform:uppercase;letter-spacing:.1em}
+.L-minimal h1{font-weight:300;letter-spacing:.04em}.L-minimal h2{font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:#555;font-size:11px}
+.L-bold header{background:var(--pc);color:#fff;margin:-40px -40px 14px;padding:28px 40px}.L-bold h2{color:var(--pc);border-bottom:2px solid var(--pc);text-transform:uppercase}
+#paper.dn .grid{margin:-30px}.lay{max-height:440px;overflow:auto}.lay button{font-size:12px}.L-gradient header{background:linear-gradient(120deg,var(--pc),#0f172a);color:#fff;margin:-40px -40px 14px;padding:30px 40px}.L-gradient h2{color:var(--pc);text-transform:uppercase;letter-spacing:.12em;font-size:12px}.L-split header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:4px solid var(--pc);padding-bottom:10px}.L-split .ct{text-align:right}.L-split h2{background:#eef0f3;border-left:4px solid var(--pc);padding:3px 8px}.L-magazine h1{font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1}.L-magazine .ti{color:var(--pc);font-size:16px}.L-magazine h2{font-size:21px;font-weight:300;font-style:italic;color:var(--pc)}.L-timeline header{border-left:6px solid var(--pc);padding-left:14px}.L-timeline section{display:grid;grid-template-columns:130px 1fr;gap:14px;border-top:1px solid #ddd;padding-top:10px;margin-top:8px}.L-timeline h2{margin:0;color:var(--pc);text-transform:uppercase;font-size:12px}.L-sidebar .grid,.L-sidelight .grid{display:grid;grid-template-columns:220px 1fr;margin:-40px;min-height:1000px}.grid aside{padding:32px 20px}.grid main{padding:34px 30px}.grid aside h1{font-size:23px;word-break:break-word}.grid aside .ct span{display:block;margin:2px 0;word-break:break-all}.L-sidebar aside{background:var(--pc);color:#fff}.L-sidebar aside h2{border-bottom:1px solid rgba(255,255,255,.55);text-transform:uppercase;font-size:12px}.L-sidelight aside{background:#eef0f3}.L-sidelight aside h2,.L-sidebar main h2,.L-sidelight main h2{color:var(--pc);text-transform:uppercase;font-size:12px;border-bottom:2px solid var(--pc)}.pj{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}.pc{border:1px solid #d5d9df;border-radius:10px;padding:12px;break-inside:avoid}.pc b{display:block;font-size:14px}.pc small{display:block;color:var(--pc);margin:2px 0 4px}.pc i{font-size:11px;opacity:.75;word-break:break-all}.L-gallery header{text-align:center;padding:6px 0 14px}.L-gallery h1{font-size:40px;font-weight:800;color:var(--pc)}.L-gallery h2{text-align:center;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--pc)}.L-gallery .pc{background:#f8fafc;border-top:4px solid var(--pc)}#paper.L-folio{background:#0b1020;color:#e5e7eb}.L-folio header{margin:-40px -40px 16px;padding:46px 40px 28px;background:radial-gradient(circle at 85% 0,var(--pc),transparent 65%)}.L-folio h1{font-size:46px;font-weight:800;line-height:1}.L-folio .ti{font-size:16px;opacity:.85}.L-folio h2{text-transform:uppercase;letter-spacing:.15em;font-size:12px;color:#9ca3af;border-bottom:1px solid #263050}.L-folio .pc{background:#121933;border-color:#263050;border-top:4px solid var(--pc)}.L-folio .pc small{color:#93c5fd}@media print{body{background:#fff}.top,.panel{display:none!important}.app{display:block;padding:0}#paper{box-shadow:none;max-width:none;margin:0}@page{margin:10mm}}
+</style></head>
+<body>
+<div class="top"><h1>📄 ResumeForge <small>ATS-friendly resume builder</small></h1>
+<span id="docsw"></span><button class="btn" data-act="copy">Copy plain text</button><button class="btn p" data-act="print">Save as PDF / Print</button></div>
+<div class="app">
+<div class="panel">
+<div class="tabs"><button data-tab="c" class="on">Content</button><button data-tab="d">Templates</button><button data-tab="a">ATS check</button></div>
+<div class="tp on" id="tc"></div>
+<div class="tp" id="td"></div>
+<div class="tp" id="ta"></div>
+</div>
+<div class="pv"><div id="paper"></div></div>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LAY=[['classic','Classic','Centered, ruled headings'],['modern','Modern','Accent bars'],['compact','Compact','Fits more on a page'],['executive','Executive','Formal, double rule'],['minimal','Minimal','Light and airy'],['bold','Bold header','Color banner name'],['gradient','Gradient Banner','Deep gradient header'],['split','Split Header','Name left, contact right'],['magazine','Magazine','Editorial big type'],['timeline','Timeline','Headings in a left rail'],['sidebar','Sidebar Pro','Colored side column'],['sidelight','Sidebar Light','Soft side column'],['gallery','Portfolio Gallery','Project cards, light'],['folio','Portfolio Dark','Dark hero + project cards']];
+const COL=['#1f2937','#2563eb','#0f766e','#b91c1c','#7c3aed','#c2410c','#0369a1','#15803d','#be185d','#4b5563'];
+const FON=[['Arial,Helvetica,sans-serif','Arial'],['Georgia,serif','Georgia'],['Calibri,Carlito,Arial,sans-serif','Calibri'],['"Times New Roman",Times,serif','Times New Roman']];
+const SAMPLE={name:'Alex Morgan',title:'Senior Product Manager',email:'alex.morgan@email.com',phone:'+1 555 010 2030',location:'Austin, TX',link:'linkedin.com/in/alexmorgan',
+summary:'Product manager with 8 years of experience launching B2B SaaS products. Skilled in roadmap planning, stakeholder management and data-driven decision making.',
+exp:[{role:'Senior Product Manager',company:'Acme Software',dates:'Jan 2021 – Present',bullets:'Led roadmap for a platform used by 40,000 users, growing retention by 18%\nLaunched 3 major features with a team of 12 engineers and designers\nReduced onboarding time by 35% through A/B testing and user research'},
+{role:'Product Manager',company:'Northwind Labs',dates:'Jun 2017 – Dec 2020',bullets:'Managed backlog and sprint planning for an agile team of 8\nImproved conversion by 22% by redesigning the checkout flow'}],
+edu:[{degree:'B.S. Business Administration',school:'University of Texas at Austin',dates:'2017'}],
+proj:[{name:'Insights Dashboard',tech:'SQL, Looker, Python',link:'github.com/alexmorgan/insights',desc:'Self-serve analytics tool adopted by 12 teams, cutting reporting requests by 40%'},{name:'Onboarding Redesign',tech:'Figma, A/B testing',link:'alexmorgan.dev/onboarding',desc:'End-to-end redesign that lifted activation by 27%'}],pubs:'',awards:'Product Excellence Award, Acme Software, 2022',langs:'English (Native), Hindi (Fluent)',refs:'',skills:'Product Strategy, Roadmapping, Agile, Scrum, SQL, A/B Testing, JIRA, Stakeholder Management, User Research, Analytics',certs:'Certified Scrum Product Owner (CSPO)\nPragmatic Institute Certified'};
+let S;try{S=JSON.parse(localStorage.getItem('rf1'))}catch(e){}
+S=S||{d:SAMPLE,t:{l:'classic',c:1,f:0,dn:0},jd:''};S.d=Object.assign({proj:SAMPLE.proj,pubs:'',awards:'',langs:'',refs:''},S.d);S.doc=S.doc||'resume';
+const save=()=>{try{localStorage.setItem('rf1',JSON.stringify(S))}catch(e){}};
+const lines=s=>String(s||'').split('\n').map(x=>x.replace(/^[\s\-•*]+/,'').trim()).filter(Boolean);
+const LISTS={exp:[['role','Job title'],['company','Company'],['dates','Dates'],['bullets','Achievements (one per line)',1]],edu:[['degree','Degree'],['school','School'],['dates','Year']],proj:[['name','Project name'],['tech','Tech / tools'],['link','Link'],['desc','What you built and the result',1]]};
+const F=[['name','Full name'],['title','Target job title'],['email','Email'],['phone','Phone'],['location','City, State/Country'],['link','LinkedIn / portfolio']];
+const fld=(a,l,v,ta)=>`<label>${l}</label>${ta?`<textarea ${a}>${esc(v)}</textarea>`:`<input ${a} value="${esc(v)}">`}`;
+function buildForm(){const d=S.d;let h='<h3>Contact</h3>'+F.map(([k,l])=>fld(`data-k="${k}"`,l,d[k])).join('');
+h+='<h3>Summary</h3>'+fld('data-k="summary"','2–3 sentences with keywords from the job',d.summary,1);
+for(const [key,title] of [['exp','Work Experience'],['proj','Projects &amp; Portfolio'],['edu','Education']]){h+=`<h3>${title}</h3>`;
+d[key].forEach((it,i)=>{h+='<div class="card">'+LISTS[key].map(([f,l,ta])=>fld(`data-l="${key}" data-i="${i}" data-f="${f}"`,l,it[f],ta)).join('')+`<p><button class="btn x" data-act="del" data-l="${key}" data-i="${i}">Remove</button></p></div>`});
+h+=`<button class="btn" data-act="add" data-l="${key}">+ Add</button>`}
+h+='<h3>Skills</h3>'+fld('data-k="skills"','Comma separated',d.skills,1)+'<h3>Certifications</h3>'+fld('data-k="certs"','One per line',d.certs,1)+'<h3>Languages</h3>'+fld('data-k="langs"','e.g. English (Native), Hindi (Fluent)',d.langs)+'<h3>Publications / Research (CV)</h3>'+fld('data-k="pubs"','One per line',d.pubs,1)+'<h3>Awards &amp; Honors</h3>'+fld('data-k="awards"','One per line',d.awards,1)+'<h3>References (CV)</h3>'+fld('data-k="refs"','Names and contacts, or leave blank',d.refs,1);
+$('#tc').innerHTML=h}
+function buildDesign(){const t=S.t;
+$('#td').innerHTML=`<label>Layout (${LAY.length} × ${COL.length} colors × ${FON.length} fonts × 2 densities = ${LAY.length*COL.length*FON.length*2} templates)</label><div class="lay">${LAY.map(([k,n,s],i)=>`<button data-act="lay" data-v="${k}" class="${t.l==k?'on':''}">${thumb(k)}<b>${n}</b><br><small style="color:var(--mu)">${s}<br>ATS-safe ${ATS[k]}%</small></button>`).join('')}</div>
+<label>Accent color</label><div class="sw">${COL.map((c,i)=>`<button data-act="col" data-v="${i}" style="background:${c}" class="${t.c==i?'on':''}" aria-label="Color ${i+1}"></button>`).join('')}</div>
+<label>Font (all ATS-safe system fonts)</label><select data-act="font">${FON.map((f,i)=>`<option value="${i}" ${t.f==i?'selected':''}>${f[1]}</option>`).join('')}</select>
+<label>Density</label><select data-act="dn"><option value="0" ${t.dn?'':'selected'}>Comfortable</option><option value="1" ${t.dn?'selected':''}>Compact</option></select>
+<p><button class="btn" data-act="nav" data-v="-1">◀ Prev</button> <button class="btn" data-act="nav" data-v="1">Next ▶</button> <button class="btn p" data-act="shuffle">🎲 Surprise me</button></p>
+<p style="color:var(--mu)">Every layout is a single column with real text, standard section headings, no tables, icons, images or text boxes, so parsers read it in the correct order.</p>`}
+const ATS={classic:98,modern:96,compact:98,executive:96,minimal:97,bold:90,gradient:88,split:94,magazine:92,timeline:90,sidebar:72,sidelight:74,gallery:68,folio:62};const ORD={resume:['sum','exp','proj','edu','sk','ce','aw','la'],cv:['sum','edu','exp','pu','proj','aw','sk','la','ce','rf'],portfolio:['sum','proj','exp','sk','edu','ce','aw','la']};function docSw(){$('#docsw').innerHTML=[['resume','Resume'],['cv','CV'],['portfolio','Portfolio']].map(([k,n])=>`<button class="btn${S.doc==k?' p':''}" data-act="doc" data-v="${k}">${n}</button>`).join(' ')+' '}const thumb=k=>{const c=COL[S.t.c],g='#cfd4da',x=k.startsWith('side')?18:k=='timeline'?16:4;let s=k=='sidebar'?`<rect width="14" height="52" fill="${c}"/>`:k=='sidelight'?'<rect width="14" height="52" fill="#e5e7eb"/>':k=='bold'||k=='gradient'?`<rect width="40" height="12" fill="${c}"/>`:k=='folio'?`<rect width="40" height="52" fill="#0b1020"/><rect x="4" y="5" width="20" height="4" fill="${c}"/>`:k=='gallery'?`<rect x="4" y="22" width="14" height="12" fill="${c}"/><rect x="22" y="22" width="14" height="12" fill="${g}"/>`:`<rect x="4" y="5" width="${k=='split'?18:30}" height="3" fill="${c}"/>`;return `<svg viewBox="0 0 40 52" width="40" height="52" style="float:right;margin-left:6px;border:1px solid ${g};background:#fff">${s}${[16,24,38,44].map(y=>`<rect x="${x}" y="${y}" width="18" height="2" fill="${g}"/>`).join('')}</svg>`};function build(ct){const d=S.d,k=S.t.l,doc=S.doc,card=doc=='portfolio'||k=='folio'||k=='gallery',U=a=>lines(a).length?`<ul>${lines(a).map(c=>`<li>${esc(c)}</li>`).join('')}</ul>`:'',pr=d.proj.filter(p=>p.name),pj=!pr.length?'':card?`<div class="pj">${pr.map(p=>`<div class="pc"><b>${esc(p.name)}</b><small>${esc(p.tech)}</small><p>${esc(p.desc)}</p><i>${esc(p.link)}</i></div>`).join('')}</div>`:pr.map(p=>`<div class="it"><div class="row"><b>${esc(p.name)}</b><span>${esc(p.tech)}</span></div><div>${esc(p.desc)} ${esc(p.link)}</div></div>`).join('');const X={sum:sec(doc=='cv'?'Profile':doc=='portfolio'?'About Me':'Professional Summary',d.summary&&`<p>${esc(d.summary)}</p>`),exp:sec(doc=='cv'?'Professional Experience':'Work Experience',d.exp.map(e=>`<div class="it"><div class="row"><b>${esc(e.role)}</b><span>${esc(e.dates)}</span></div><div class="co">${esc(e.company)}</div><ul>${lines(e.bullets).map(b=>`<li>${esc(b)}</li>`).join('')}</ul></div>`).join('')),proj:sec(doc=='portfolio'?'Featured Work':'Projects',pj),edu:sec('Education',d.edu.map(e=>`<div class="it"><div class="row"><b>${esc(e.degree)}</b><span>${esc(e.dates)}</span></div><div>${esc(e.school)}</div></div>`).join('')),sk:sec('Skills',d.skills&&`<p>${esc(d.skills)}</p>`),ce:sec('Certifications',U(d.certs)),la:sec('Languages',d.langs&&`<p>${esc(d.langs)}</p>`),pu:sec('Publications &amp; Research',U(d.pubs)),aw:sec('Awards &amp; Honors',U(d.awards)),rf:sec('References',doc=='cv'?`<p>${esc(d.refs)||'Available upon request.'}</p>`:'')};if(k.startsWith('side')){const sd=['sk','la','ce','edu'],bits=[d.email,d.phone,d.location,d.link].filter(Boolean);return `<div class="grid"><aside><h1>${esc(d.name)}</h1><div class="ti">${esc(d.title)}</div><div class="ct">${bits.map(x=>`<span>${esc(x)}</span>`).join('')}</div>${sd.map(x=>X[x]).join('')}</aside><main>${ORD[doc].filter(x=>!sd.includes(x)).map(x=>X[x]).join('')}</main></div>`}return `<header><div><h1>${esc(d.name)}</h1>${d.title?`<div class="ti">${esc(d.title)}</div>`:''}</div><div class="ct">${ct}</div></header>`+ORD[doc].map(x=>X[x]).join('')}function sec(t,b){return b?`<section><h2>${t}</h2>${b}</section>`:''}
+function render(){const d=S.d,t=S.t,p=$('#paper');
+p.className=`L-${LAY[LAY.findIndex(x=>x[0]==t.l)][0]}${t.dn?' dn':''}`;p.style.setProperty('--pc',COL[t.c]);p.style.fontFamily=FON[t.f][0];
+const ct=[d.email,d.phone,d.location,d.link].filter(Boolean).map(esc).join(' | ');
+p.innerHTML=build(ct)||`<header><h1>${esc(d.name)}</h1>${d.title?`<div class="ti">${esc(d.title)}</div>`:''}<div class="ct">${ct}</div></header>`
++sec('Professional Summary',d.summary&&`<p>${esc(d.summary)}</p>`)
++sec('Work Experience',d.exp.map(e=>`<div class="it"><div class="row"><b>${esc(e.role)}</b><span>${esc(e.dates)}</span></div><div class="co">${esc(e.company)}</div><ul>${lines(e.bullets).map(b=>`<li>${esc(b)}</li>`).join('')}</ul></div>`).join(''))
++sec('Education',d.edu.map(e=>`<div class="it"><div class="row"><b>${esc(e.degree)}</b><span>${esc(e.dates)}</span></div><div>${esc(e.school)}</div></div>`).join(''))
++sec('Skills',d.skills&&`<p>${esc(d.skills)}</p>`)
++sec('Certifications',lines(d.certs).length?`<ul>${lines(d.certs).map(c=>`<li>${esc(c)}</li>`).join('')}</ul>`:'')}
+function plain(){const d=S.d;let o=[d.name,d.title,[d.email,d.phone,d.location,d.link].filter(Boolean).join(' | '),'','PROFESSIONAL SUMMARY',d.summary,'','WORK EXPERIENCE'];
+d.exp.forEach(e=>{o.push(`${e.role} | ${e.company} | ${e.dates}`,...lines(e.bullets).map(b=>'- '+b),'')});o.push('EDUCATION');d.edu.forEach(e=>o.push(`${e.degree}, ${e.school}, ${e.dates}`));o.push('','SKILLS',d.skills,'','CERTIFICATIONS',...lines(d.certs),'','PROJECTS',...d.proj.map(p=>`${p.name} | ${p.tech} | ${p.desc}`),'','LANGUAGES',d.langs,'','AWARDS',...lines(d.awards),'','PUBLICATIONS',...lines(d.pubs));return o.join('\n')}
+const STOP=new Set('with that this have from your will they their about which would there been were also more such than into other these those must able work team years year experience strong including etc and the for are you our can has all any who not but job role'.split(' '));
+const VERBS='led managed launched built created developed designed improved reduced increased grew delivered implemented drove owned optimized analyzed established streamlined negotiated coordinated generated launched mentored automated achieved executed planned scaled supported migrated resolved secured trained'.split(' ');
+function analyze(){const d=S.d,txt=plain().toLowerCase(),bl=d.exp.flatMap(e=>lines(e.bullets)),wc=txt.split(/\s+/).length;
+const sk=d.skills.split(',').filter(x=>x.trim()).length,vb=bl.filter(b=>VERBS.includes(b.split(' ')[0].toLowerCase())).length,num=bl.filter(b=>/\d/.test(b)).length;
+const C=[[/^\S+@\S+\.\S+$/.test(d.email),10,'Valid email address'],[!!d.phone,5,'Phone number present'],[(d.summary||'').split(/\s+/).length>=20,10,'Summary of 20+ words'],
+[d.exp.length>0&&bl.length>=4,15,'Experience with 4+ achievement bullets'],[bl.length>0&&vb/bl.length>=.7,15,'70%+ bullets start with an action verb'],[bl.length>0&&num/bl.length>=.4,15,'40%+ bullets include numbers or metrics'],
+[sk>=8,10,'8+ skills listed'],[d.edu.length>0,5,'Education section'],[wc>=250&&wc<=800,10,'Length 250–800 words ('+wc+')'],[ATS[S.t.l]>=85,5,'ATS-safe single-column template']];
+const st=C.reduce((a,c)=>a+(c[0]?c[1]:0),0);let kw=null,miss=[],hit=[];
+if(S.jd.trim()){const f={};(S.jd.toLowerCase().match(/[a-z][a-z+#.\-]{2,}/g)||[]).forEach(w=>{if(w.length>3&&!STOP.has(w))f[w]=(f[w]||0)+1});
+const top=Object.entries(f).sort((a,b)=>b[1]-a[1]).slice(0,24).map(x=>x[0]);top.forEach(w=>(txt.includes(w)?hit:miss).push(w));kw=top.length?Math.round(hit.length/top.length*100):0}
+const total=kw==null?st:Math.round(st*.5+kw*.5);return {C,st,kw,hit,miss,total}}
+function buildAts(){const r=analyze(),col=r.total>=80?'var(--ok)':r.total>=60?'#d97706':'var(--bad)';
+$('#ta').innerHTML=`<div class="score" style="color:${col}">${r.total}<small style="font-size:16px;color:var(--mu)">/100</small></div><div style="color:var(--mu)">${r.kw==null?'Structure score. Paste a job description for keyword matching.':`Blend of structure (${r.st}) and keyword match (${r.kw}%)`}</div>
+<label>Paste the job description</label><textarea id="jd" style="min-height:120px" placeholder="Paste the target job posting here…">${esc(S.jd)}</textarea><p><button class="btn p" data-act="an">Analyze</button></p>
+${r.kw==null?'':`<h3>Keywords found</h3>${r.hit.map(w=>`<span class="chip g">${esc(w)}</span>`).join('')||'None'}<h3>Missing keywords</h3>${r.miss.map(w=>`<span class="chip r">${esc(w)}</span>`).join('')||'None. Great match.'}`}
+<h3>Checklist</h3>${r.C.map(c=>`<div class="ck"><b style="color:var(${c[0]?'--ok':'--bad'})">${c[0]?'✓':'✗'}</b><span>${c[2]}</span></div>`).join('')}`}
+document.addEventListener('input',e=>{const t=e.target,D=t.dataset;
+if(D.k){S.d[D.k]=t.value}else if(D.l){S.d[D.l][D.i][D.f]=t.value}else return;save();render()});
+document.addEventListener('change',e=>{const t=e.target,a=t.dataset.act;if(a=='font')S.t.f=+t.value;else if(a=='dn')S.t.dn=+t.value;else return;save();render()});
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const D=b.dataset,a=D.act;
+if(D.tab){document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x==b));document.querySelectorAll('.tp').forEach(x=>x.classList.toggle('on',x.id=='t'+D.tab));if(D.tab=='a')buildAts();return}
+if(a=='print'){try{window.print()}catch(x){alert('Printing is blocked here. Open the page in its own tab and try again.')}return}
+if(a=='copy'){const t=plain();(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>b.textContent='Copied ✓',()=>prompt('Copy your resume text:',t));return}
+if(a=='add'){S.d[D.l].push(({exp:{role:'',company:'',dates:'',bullets:''},edu:{degree:'',school:'',dates:''},proj:{name:'',tech:'',link:'',desc:''}})[D.l]);buildForm()}
+else if(a=='del'){S.d[D.l].splice(+D.i,1);buildForm()}
+else if(a=='lay'){S.t.l=D.v;buildDesign()}else if(a=='nav'){const i=LAY.findIndex(x=>x[0]==S.t.l);S.t.l=LAY[(i+ +D.v+LAY.length)%LAY.length][0];buildDesign()}else if(a=='doc'){S.doc=D.v;S.t.l=D.v=='portfolio'?'folio':D.v=='cv'?'executive':(['folio','gallery'].includes(S.t.l)?'modern':S.t.l);docSw();buildDesign()}else if(a=='col'){S.t.c=+D.v;buildDesign()}
+else if(a=='shuffle'){S.t={l:LAY[Math.random()*LAY.length|0][0],c:Math.random()*10|0,f:Math.random()*4|0,dn:Math.random()<.3?1:0};buildDesign()}
+else if(a=='an'){S.jd=$('#jd').value;buildAts()}else return;save();render()});
+docSw();buildForm();buildDesign();render();
+</script></body></html>
